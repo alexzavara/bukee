@@ -1,25 +1,35 @@
 const animItems = document.querySelectorAll('._numbersCount')
 
+
 if (animItems.length > 0) {
     window.addEventListener('scroll', animOnScroll)
     function animOnScroll(params) {
         for (let index = 0; index < animItems.length; index++){
             const animItem = animItems[index]
-            const animItemHeight = animItem.offsetHeight
-            const animItemOffset = offset(animItem).top
+            let animItemHeight = animItem.offsetHeight
+            let animItemOffset = offset(animItem).top
             const animStart = 4
             let animItemStart = +animItem.innerHTML
             const animItemMax = +animItem.dataset.max
-
+            const media400 = 400
+            let winInWidth = window.innerWidth
+            const diferenseWidth = winInWidth <= media400
 
             let animItemPoint = window.innerHeight - animItemHeight / animStart
+
 
             if (animItemHeight > window.innerHeight) {
                 animItemPoint = window.innerHeight - window.innerHeight / animStart
             }
 
+            if ((animItem == animItems[2]) && diferenseWidth){
+                    animItemOffset = animItemOffset - 88
+                }
+
             if ((pageYOffset > animItemOffset - animItemPoint) && pageYOffset < (animItemOffset + animItemHeight)) {
+
                 this.removeEventListener('scroll', animOnScroll)
+
                 if (animItemMax < 14) {
                     let interval = setInterval(function() {
                         animItem.innerHTML = ++animItemStart
@@ -40,11 +50,12 @@ if (animItems.length > 0) {
                         }
                         animItem.innerHTML = animNum
                     }, animT)
-                }
+                }   
             } 
         }
     }
 }
+
 
 function offset(el) {
     const rect = el.getBoundingClientRect(),
