@@ -1,0 +1,1703 @@
+@import '_variables'
+@import '_mixins'
+
+//main options
+*,*:after,*:before
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body
+    font-family: 'Roboto Slab', serif
+
+.container
+    max-width: 1200px
+    padding: 0 15px
+    width: 100%
+    margin: 0 auto
+
+//global parametrs
+//logo
+.logo
+    z-index: 10
+    transition: all 0.5s
+    padding-left: 39px
+    text-transform: uppercase
+    position: relative
+    font-size: 28px
+    line-height: 1.2
+    font-weight: 700
+    letter-spacing: 0.8px
+    color: #fefefe
+    text-decoration: none
+    @media (max-width: 1024px)
+        font-size: 26px
+        padding-left: 35px
+    @media (max-width: 480px)
+        font-size: 22px
+        padding-left: 30px
+    span
+        color: $siteColor
+    &::after,&::before
+        position: absolute
+        content: ""
+        top: 4px
+        left: 0
+        width: 0
+        height: 0
+    &::after
+        border-top: 28px solid #44444f
+        border-right: 28px solid transparent
+        z-index: 10
+        @media (max-width: 1024px)
+            border-top: 25px solid #44444f
+            border-right: 25px solid transparent
+        @media (max-width: 480px)
+            border-top: 20px solid #44444f
+            border-right: 20px solid transparent
+    &::before
+        border-top: 28px solid $siteColor
+        border-left: 28px solid transparent
+        z-index: 9
+        @media (max-width: 1024px)
+            border-top: 25px solid $siteColor
+            border-left: 25px solid transparent
+        @media (max-width: 480px)
+            border-top: 20px solid $siteColor
+            border-left: 20px solid transparent
+
+//button
+.button
+    transition: background .5s
+    padding: 13px 0 0 25px
+    text-decoration: none
+    display: block
+    width: 250px
+    height: 48px
+    background-color: #65e5a5
+    background-image: linear-gradient(-90.0deg, rgba(101,228,206,0.69) -24%, rgba(101,228,161,0.69) 125%)
+    box-shadow: 0px 2px 0px 0px rgba(101,228,125,0.5)
+    border-radius: 3px
+    font-size: 18px
+    line-height: 1.2
+    font-weight: 400
+    letter-spacing: .7px
+    color: #ffffff
+    cursor: pointer
+    @media (max-width: 1024px)
+        font-size: 16px
+        width: 230px
+    @media (max-width: 800px)
+        font-size: 14px
+        width: 200px
+        height: 38px
+        padding: 11px 0 0 20px
+    @media (max-width: 480px)
+        font-size: 12px
+        width: 170px
+        height: 30px
+        padding: 8px 0 0 16px
+    &:hover
+        background-image: none
+        background: #65e47d
+        //background-image: linear-gradient(-90deg, rgb(101 199 182 / 0%) 0%, rgb(101 228 161 / 0%) 0%)
+        
+
+//title
+.title
+    width: 100%
+    font-size: 48px
+    line-height: 44px
+    font-weight: 700
+    letter-spacing: 2px
+    color: #44444f
+    @media (max-width: 1024px)
+        font-size: 39px
+    @media (max-width: 800px)
+        font-size: 36px
+    @media (max-width: 480px)
+        font-size: 32px  
+
+//title-down
+.title-down
+    width: 100%
+    font-size: 18px
+    line-height: 20px
+    font-weight: 400
+    letter-spacing: .9px
+    color: $siteColor
+    @media (max-width: 1024px)
+        font-size: 16px
+    @media (max-width: 800px)
+        font-size: 14px
+    @media (max-width: 480px)
+        font-size: 13px
+
+
+
+//________________________________
+//header
+.header
+    background-color: #536472
+    background-image: linear-gradient(-60.0deg, #54b7a1 -23%, #426384 123%)
+    background-repeat: no-repeat
+    background-position: center
+    background-size: cover
+    width: 100%
+    &__logo
+        margin-right: 328px  
+        @media (max-width: 1200px)
+            margin-right: 0      
+    &__burger-btn
+        display: none
+        @media (max-width: 800px)
+            transition: all .3s
+            display: block
+            z-index: 10
+            position: relative
+            width: 30px
+            height: 20px
+            span
+                transition: all .2s
+                position: absolute
+                width: 100%
+                top: 9px
+                left: 0
+                height: 2px
+                background-color: #fff
+            &::before
+                transition: all .3s
+                content: ''
+                position: absolute
+                width: 100%
+                height: 2px
+                background-color: #fff
+                top: 0
+            &::after
+                transition: all .3s
+                content: ''
+                position: absolute
+                width: 100%
+                height: 2px
+                background-color: #fff
+                bottom: 0
+                left: 0
+            &_active
+                span
+                    height: 0
+                &::before
+                    transform: rotate(45deg)
+                    top: 9px
+                &::after
+                    transform: rotate(-45deg)
+                    bottom: 9px
+    &__nav
+        transition: all 0.3s
+        display: flex
+        align-items: center
+        padding-top: 46px
+        margin-bottom: 178px
+        @media (max-width: 1200px)
+            justify-content: space-between
+        @media (max-width: 1024px)
+            padding-top: 25px
+        @media (max-width: 800px)
+            padding-top: 15px
+            padding-bottom: 15px
+            margin-bottom: 100px
+            position: fixed
+            width: 100%
+            top: 0
+            left: 0
+            z-index: 3
+            &::before
+                content: ''
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                background-color: #536472
+                background-image: linear-gradient(-60.0deg, #54b7a1 -23%, #426384 123%)
+                z-index: 3
+                box-shadow: 0px 1px 14px 1px #35353547
+            &__link
+                transition: border-radius 0s
+                font-size: 14px
+                display: block
+                text-align: left
+                padding: 8px 2px 8px 2px
+                color: #fff
+                z-index: 1
+                &:hover
+                    border-radius: 0
+                    border-bottom: 1px solid #fff
+                    background-color: #1085e4
+        @media (max-width: 480px)
+            padding-top: 10px
+            padding-bottom: 10px
+    &__menu
+        list-style: none
+        display: flex
+        @media (max-width: 800px)
+            display: none
+            transition: all .3s
+            overflow: auto
+            position: fixed
+            display: block
+            top: -100%
+            left: 0
+            width: 100%
+            height: 100%
+            background-color: #536472
+            background-image: linear-gradient(-60.0deg, #54b7a1 -23%, #426384 123%)
+            color: #7e8bae
+            padding: 60px 20% 5px 12px
+            z-index: 1
+            &_active
+                top: 0
+                z-index: 1
+        &-item:last-of-type
+            a
+                margin: 0 
+        &-link
+            display: block
+            position: relative
+            padding: 8px
+            text-decoration: none
+            font-family: $secondFont
+            font-size: 16px
+            line-height: 1.2
+            font-weight: 400
+            letter-spacing: 1.2px
+            color: #ffffff
+            margin-right: 1px
+            @media (max-width: 1024px)
+                padding: 6px
+                font-size: 14px
+            @media (max-width: 800px)
+                width: 95px
+            &::after
+                transition: all .3s
+                content: ''
+                position: absolute
+                top: 32px
+                left: 11%
+                height: 3px
+                width: 80%
+                //background-color: $siteColor
+                @media (max-width: 800px)
+                    top: 95%
+                    left: 6px
+                    width: 80%
+            &:hover::after
+                background-color: $siteColor
+            
+//product
+.product
+    padding-bottom: 162px
+    display: flex
+    width: 100%
+    transition: all .5s
+    @media (max-width: 800px)
+        justify-content: center
+        padding-top: 70px
+        padding-bottom: 90px
+        flex-wrap: wrap
+    @media (max-width: 480px)
+        padding-top: 60px
+        padding-bottom: 50px
+    &__book
+        border-radius: 7px
+        background-image: url(../img/header/product/book.jpg)
+        background-size: contain
+        background-repeat: no-repeat
+        width: 38%
+        @media (max-width: 950px)
+            width: 350px
+            height: 502px
+        @media (max-width: 800px)
+            height: 290px
+            width: 202px
+        &-title
+            font-size: 36px
+            line-height: 1.2
+            font-weight: 700
+            text-transform: uppercase
+            letter-spacing: 1px
+            color: #ffffff
+            padding: 24.5% 0 0 8%
+            width: 100%
+            text-align: center
+            @media (max-width: 1024px)
+                font-size: 35px
+            @media (max-width: 800px)
+                font-size: 22px
+                padding: 19.5% 0 0 0
+        &-text
+            font-family: $secondFont
+            font-size: 14px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: .7px
+            color: $siteColor
+            text-align: center
+            padding: 0 0 0 8%
+            @media (max-width: 1024px)
+                font-size: 13.5px
+            @media (max-width: 800px)
+                width: 80%
+                margin: 0 auto
+                font-size: 12px
+                padding: 5px 0 0 0 
+        &-author
+            font-family: $secondFont
+            font-size: 14px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: .6px
+            color: $siteColor
+            padding: 87.1% 0 11.5% 19.4%
+            @media (max-width: 1024px)
+                font-size: 13.5px
+                padding-top: 84%
+            @media (max-width: 950px)
+                padding-bottom: 6.5%
+            @media (max-width: 800px)
+                padding: 64% 0 9% 9.4%
+                font-size: 12px
+    &__wrapper
+        width: 50%
+        margin-left: 4.7%
+        @media (max-width: 1024px)
+            margin-left: 3.7%
+        @media (max-width: 900px)
+            margin-left: 32px
+        @media (max-width: 800px)
+            width: 100%
+            margin-left: 0
+    &__author
+        font-family: $secondFont
+        font-size: 18px
+        line-height: 27px
+        font-weight: 400
+        letter-spacing: 1px
+        color: #ffffff
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 800px)
+            font-size: 14px
+            margin-top: 20px
+        @media (max-width: 480px)
+            font-size: 13px
+            margin-top: 15px
+    &__title
+        margin-top: 31px
+        font-size: 48px
+        line-height: 44px
+        font-weight: 600
+        letter-spacing: 1.6px
+        color: #ffffff
+        @media (max-width: 1024px)
+            margin-top: 15px
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+            margin-top: 0
+        @media (max-width: 343px)
+            font-size: 29px
+    &__text-1
+        margin-top: 19px
+        font-size: 18px
+        line-height: 15px
+        font-weight: 400
+        letter-spacing: .9px
+        color: $siteColor
+        @media (max-width: 1024px)
+            font-size: 16px
+            margin-top: 15px
+        @media (max-width: 885px)
+            line-height: 18px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 13px
+            margin-top: 5px
+    &__text-2
+        max-height: 220px
+        margin-top: 42px
+        margin-bottom: 46px
+        overflow: auto
+        font-family: $secondFont
+        font-size: 15px
+        line-height: 24px
+        font-weight: 400
+        letter-spacing: .75px
+        color: #ffffff
+        @media (max-width: 1024px)
+            font-size: 14px
+            max-height: 265px
+            margin-top: 20px
+            margin-bottom: 24px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 567px)
+            font-size: 13px
+        @media (max-width: 480px)
+            font-size: 12px
+            margin-top: 15px
+            margin-bottom: 15px
+            max-height: 300px
+        &over
+            display: block
+            margin-top: 25px
+            @media (max-width: 1024px)
+                margin-top: 20px
+            @media (max-width: 800px)
+                margin-top: 15px
+            @media (max-width: 480px)
+                margin-top: 10px
+    &__text-bottom
+        margin: 22px 0 0px -5px
+        font-family: $secondFont
+        font-size: 12px
+        line-height: 15px
+        font-weight: 400
+        font-style: italic
+        letter-spacing: 0.35px
+        color: #ffffff
+        @media (max-width: 1024px)
+            margin-top: 17px
+
+    //header__________________________//
+
+//author
+.author
+    padding-top: 160px
+    display: flex
+    justify-content: space-between
+    width: 100%
+    transition: all .5s
+    @media (max-width: 1024px)
+        align-items: center
+    @media (max-width: 800px)
+        justify-content: center
+        padding-top: 60px
+        flex-wrap: wrap-reverse
+    @media (max-width: 480px)
+        padding-top: 40px
+    &__wrapper
+        width: 50%
+        @media (max-width: 800px)
+            width: 100%
+            margin-right: 0
+    &__wrapper-2
+        width: 37.1%
+        margin-left: 12.9%
+        @media (max-width: 800px)
+            min-width: 240px
+        @media (max-width: 480px)
+            min-width: 200px
+    &__title
+        margin-top: 17px
+        font-family: $secondFont
+        font-size: 18px
+        line-height: 27px
+        font-weight: 400
+        letter-spacing: 0.9px
+        color: #696980
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 800px)
+            font-size: 14px
+            margin-top: 20px
+        @media (max-width: 480px)
+            font-size: 13px
+            margin-top: 15px
+    &__name
+        margin-top: 20px
+        font-size: 48px
+        line-height: 44px
+        font-weight: 600
+        letter-spacing: 1.6px
+        color: #44444f
+        @media (max-width: 1024px)
+            margin-top: 15px
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+            margin-top: 0
+        @media (max-width: 343px)
+            font-size: 29px
+    &__text-1
+        margin-top: 19px
+        font-size: 18px
+        line-height: 15px
+        font-weight: 400
+        letter-spacing: .9px
+        color: $siteColor
+        @media (max-width: 1024px)
+            font-size: 16px
+            margin-top: 15px
+        @media (max-width: 885px)
+            line-height: 18px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 13px
+            margin-top: 5px
+    &__text-2
+        max-height: 220px
+        margin-top: 42px
+        margin-bottom: 46px
+        overflow: auto
+        font-family: $secondFont
+        font-size: 15px
+        line-height: 24px
+        font-weight: 400
+        letter-spacing: .75px
+        color: #696980
+        @media (max-width: 1024px)
+            font-size: 14px
+            max-height: 265px
+            margin-top: 20px
+            margin-bottom: 24px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 567px)
+            font-size: 13px
+        @media (max-width: 480px)
+            font-size: 12px
+            margin-top: 15px
+            margin-bottom: 15px
+            max-height: 300px
+        &over
+            display: block
+            margin-top: 25px
+            @media (max-width: 1024px)
+                margin-top: 20px
+            @media (max-width: 800px)
+                margin-top: 15px
+            @media (max-width: 480px)
+                margin-top: 10px
+    &__btn
+        width: 237px
+        padding: 13px 0 0 28px
+        @media (max-width: 1024px)
+            width: 217px
+        @media (max-width: 800px)
+            width: 186px
+            padding: 13px 0 0 22px
+        @media (max-width: 480px)
+            width: 156px
+            padding: 8px 0 0 16px
+    &__text-bottom
+        margin: 22px 0 0px -5px
+        font-family: $secondFont
+        font-size: 12px
+        line-height: 15px
+        font-weight: 400
+        font-style: italic
+        letter-spacing: 0.35px
+        color: #696980
+        @media (max-width: 1024px)
+            margin-top: 17px
+    &__img
+        width: 100%
+        height: auto
+        background: linear-gradient(-60.0deg, #5acab1 -13%, #426384 113%) 
+        img
+            width: 100%
+            height: auto
+            padding: 11.9% 0 9.6% 0
+            transform: translateX(-10.4%)
+            
+//numbers
+.numbers
+    padding-top: 164px
+    padding-bottom: 148px
+    display: flex
+    justify-content: space-between
+    @media (max-width: 1024px)
+        padding: 130px 15px 130px 15px
+    @media (max-width: 800px)
+        padding: 90px 15px 90px 15px
+    @media (max-width: 480px)
+        padding: 50px 15px 50px 15px
+    @media (max-width: 400px)
+        flex-wrap: wrap
+        justify-content: center
+    &__wrapper
+        @media (max-width: 400px)
+            width: 50%
+        &:first-of-type
+            margin-left: 7%
+            @media (max-width: 1024px)
+                margin-left: 5.5%
+            @media (max-width: 924px)
+                margin-left: 3%
+            @media (max-width: 850px)
+                margin-left: 1%
+            @media (max-width: 800px)
+                margin-left: 0
+            p
+                &:first-of-type
+                    padding-left: 10%
+        &:nth-of-type(2)
+            margin-left: 2.2%
+            @media (max-width: 400px)
+                margin-left: 0
+            p
+                &:first-of-type
+                    padding-left: 8%
+        &:last-of-type
+            width: 237px
+            margin-right: 5.5%
+            @media (max-width: 1024px)
+                width: 205px
+            @media (max-width: 924px)
+                margin-right: 3%
+            @media (max-width: 850px)
+                margin-right: 1%
+            @media (max-width: 800px)
+                width: 175px
+                margin-right: 0
+            @media (max-width: 480px)
+                width: 135px
+            @media (max-width: 400px)
+                width: 50%
+            p
+                &:last-of-type
+                    letter-spacing: -0.4px
+                    margin-left: -3.5%
+    &__num
+        font-size: 80px
+        line-height: 44px
+        font-weight: 300
+        letter-spacing: 1.9px
+        color: #65e49d
+        text-align: center
+        margin-bottom: 25px
+        @media (max-width: 1024px)
+            font-size: 70px
+            margin-bottom: 20px
+        @media (max-width: 800px)
+            font-size: 60px
+        @media (max-width: 480px)
+            font-size: 45px
+            margin-bottom: 0
+    &__text
+        font-size: 18px
+        line-height: 44px
+        font-weight: 400
+        letter-spacing: 0
+        color: #696980
+        text-align: center
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 12px
+
+//contents
+.contents
+    background: #f5f6fa
+    padding-top: 155px
+    padding-bottom: 256px
+    @media (max-width: 870px)
+        padding-bottom: 96px
+    @media (max-width: 800px)
+        padding-top: 60px
+        padding-bottom: 90px
+    @media (max-width: 480px)
+        padding-top: 50px
+        padding-bottom: 50px
+    &__title
+        width: 100%
+        text-align: center
+        font-size: 48px
+        line-height: 44px
+        font-weight: 700
+        letter-spacing: 2px
+        color: #44444f
+        @media (max-width: 1024px)
+            font-size: 39px
+        @media (max-width: 800px)
+            text-align: left
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+    &__title-down
+        margin-top: 16px
+        margin-bottom: 85px
+        width: 100%
+        text-align: center
+        font-size: 18px
+        line-height: 20px
+        font-weight: 400
+        letter-spacing: .9px
+        color: $siteColor
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 800px)
+            font-size: 14px
+            margin-top: 12px
+            margin-bottom: 70px
+            text-align: left
+        @media (max-width: 555px)
+            margin-bottom: 50px
+        @media (max-width: 480px)
+            font-size: 13px
+            margin-top: 5px
+            margin-bottom: 30px
+    &__wrapper
+        display: flex
+        justify-content: space-between
+        @media (max-width: 870px)   
+            justify-content: center
+            flex-wrap: wrap
+    &__left
+        width: 465px
+        @media (max-width: 1060px)
+            width: 40%
+        @media (max-width: 870px)
+            margin-right: 5%
+            margin-bottom: 50px
+            width: 100%
+        @media (max-width: 480px)
+            margin-bottom: 40px
+        &-title
+            font-size: 24px
+            line-height: 24px
+            font-weight: 700
+            letter-spacing: 0.05em
+            color: #44444f
+            margin-bottom: 20px
+            @media (max-width: 1024px)
+                font-size: 22px
+            @media (max-width: 800px)
+                font-size: 20px
+            @media (max-width: 480px)
+                font-size: 18px
+        &-text
+            font-family: $secondFont
+            font-size: 15px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: 0.05em
+            color: #696980
+            margin-bottom: 30px
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+        &-links
+            display: flex
+        &-footer
+            font-family: 'Roboto Slab'
+            font-size: 18px
+            line-height: 24px
+            font-weight: 700
+            letter-spacing: 0.05em
+            color: #44444f
+            margin-right: 25px
+            margin-left: 2px
+            @media (max-width: 1024px)
+                font-size: 16px
+            @media (max-width: 480px)
+                font-size: 14px
+        &-link
+            i
+                font-size: 18px
+                line-height: 24px
+                font-weight: 400
+                letter-spacing: 0.05em
+                color: $siteColor
+                &:first-of-type
+                    margin-right: 15px
+                @media (max-width: 1024px)
+                    font-size: 16px
+                @media (max-width: 480px)
+                    font-size: 14px
+    &__right
+        width: 573.3px
+        @media (max-width: 1060px)
+            max-width: 551.3px
+            width: auto
+        @media (max-width: 870px)
+            max-width: inherit
+            width: 100%
+        &-title
+            font-family: 'Roboto Slab'
+            font-size: 24px
+            line-height: 24px
+            font-weight: 700
+            letter-spacing: 0.05em
+            color: #44444f
+            margin-bottom: 25px
+            @media (max-width: 1024px)
+                font-size: 22px
+            @media (max-width: 800px)
+                font-size: 20px
+            @media (max-width: 480px)
+                font-size: 18px
+                margin-bottom: 15px
+        &-link
+            transition: background .5s
+            position: relative
+            margin-right: 14px
+            display: inline-block
+            width: 22px
+            height: 22px
+            background-color: #65e1b9
+            background-image: linear-gradient(-90.0deg, rgba(101,228,206,0.69) -22%, rgba(101,228,161,0.69) 127%)
+            &::before
+                content: ''
+                position: absolute
+                width: 7px
+                height: 1px
+                top: 50%
+                left: 35.17%
+                background-color: #fff
+                @media (max-width: 1024px)
+                    left: 32%
+            &::after
+                content: ''
+                position: absolute
+                width: 1px
+                height: 8px
+                top: 33.17%
+                left: 48%
+                background-color: #fff
+            &:hover
+                background-color: #5189a0
+                background-image: none
+            @media (max-width: 1024px)
+                width: 18px
+                height: 18px
+                margin-right: 10px
+        &-lists
+            @media (max-width: 540px)
+                width: 100%
+            &:first-of-type
+                margin-right: 10px
+                width: 50.5%
+                @media (max-width: 1060px)
+                    width: 270px
+                @media (max-width: 1024px)
+                    width: 245px
+                @media (max-width: 870px)
+                    max-width: 270px
+                    width: 50%
+                @media (max-width: 540px)
+                    max-width: inherit
+                    width: 100%
+        &-list
+            font-family: $secondFont
+            font-size: 15px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: 0.05em
+            color: #696980
+            display: flex
+            align-items: center
+            margin-bottom: 8px
+            list-style: none
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+        &-btn
+            margin-left: 3px
+            width: 135px
+            padding: 13px 0 0 45px
+            @media (max-width: 480px)
+                padding: 8px 0px 0 39px
+                width: 110px
+        &-wrapper
+            display: flex
+            margin-left: 3px
+            margin-bottom: 28px
+            @media (max-width: 870px)
+                flex-wrap: wrap
+            @media (max-width: 480px)
+                margin-bottom: 14px
+
+//other
+.other
+    padding-top: 151px
+    padding-bottom: 162px
+    @media (max-width: 800px)
+        padding-top: 60px
+        padding-bottom: 90px
+    @media (max-width: 480px)
+        padding-top: 40px
+        padding-bottom: 50px
+    &__title
+        letter-spacing: 1.8px
+        text-align: center
+        @media (max-width: 1024px)
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+    &__title-down
+        margin-top: 16px
+        margin-bottom: 87px
+        text-align: center
+        @media (max-width: 1024px)
+            font-size: 16px
+            margin-bottom: 60px
+        @media (max-width: 800px)
+            font-size: 14px
+            margin-bottom: 45px
+        @media (max-width: 480px)
+            font-size: 13px
+    &__wrapper
+        display: flex
+        justify-content: space-around
+        margin-bottom: 82px
+        @media (max-width: 1024px)
+            justify-content: center
+        @media (max-width: 800px)
+            flex-wrap: wrap
+            margin-bottom: 65px
+        @media (max-width: 480px)
+            margin-bottom: 45px
+        @media (max-width: 320px)
+            margin-bottom: 30px
+    &__wrapper-book
+        width: 27%
+        @media (max-width: 1024px)
+            max-width: 268px
+            width: 33%
+        @media (max-width: 800px)
+            min-width: 280px
+        &:first-of-type
+            @media (max-width: 800px)
+                width: 100%
+                margin-bottom: 30px
+            @media (max-width: 607px)
+                margin-bottom: 15px
+        &:nth-of-type(2)
+            margin-right: 2.5%
+            margin-left: 2.5%
+            @media (max-width: 1024px)
+                margin-right: 1.5%
+                margin-left: 1.5%  
+            @media (max-width: 607px)
+                margin-bottom: 15px
+        &:last-of-type
+            @media (max-width: 800px)
+                width: 100%
+    &__book
+        margin-left: 23px
+        margin-bottom: 10.4%
+        border-radius: 7px
+        background-image: url(../img/other/book.jpg)
+        background-size: contain
+        background-repeat: no-repeat
+        width: 85.5%
+        @media (max-width: 1024px)
+            min-width: 200px
+        &-title
+            text-align: center
+            padding-top: 25%
+            padding-left: 13%
+            padding-bottom: 6px
+            width: 100%
+            font-family: 'Roboto Slab'
+            font-size: 24px
+            line-height: 1.2
+            font-weight: 700
+            text-transform: uppercase
+            letter-spacing: 0.04em
+            color: #ffffff
+        &-text
+            padding-left: 12%
+            padding-bottom: 86%
+            text-align: center
+            width: 100%
+            font-family: $secondFont
+            font-size: 12px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: 0.05em
+            color: $siteColor
+            @media (max-width: 1024px)
+                padding-bottom: 80%
+        &-author
+            padding-left: 8%
+            text-align: center
+            width: 100%
+            padding-bottom: 11%
+            font-family: $secondFont
+            font-size: 12px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: 0.05em
+            color: $siteColor
+    &__bottom
+        width: 100%
+        &-title
+            margin-bottom: 16px
+            width: 100%
+            text-align: center
+            font-family: 'Roboto Slab'
+            font-size: 24px
+            line-height: 24px
+            font-weight: 700
+            letter-spacing: 0.05em
+            color: #44444f
+            @media (max-width: 1024px)
+                font-size: 23px
+            @media (max-width: 800px)
+                font-size: 22px
+            @media (max-width: 480px)
+                font-size: 20px
+                margin-bottom: 12px
+        &-text
+            margin-bottom: 17px
+            width: 100%
+            text-align: center
+            font-family: $secondFont
+            font-size: 15px
+            line-height: 24px
+            font-weight: 400
+            letter-spacing: 0.05em
+            color: #696980
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+                line-height: 20px
+                margin-bottom: 12px
+        &-more
+            display: block
+            width: 100%
+            text-align: center
+            text-decoration: none
+            font-family: $secondFont
+            font-size: 15px
+            line-height: 24px
+            font-weight: 700
+            letter-spacing: 0.05em
+            color: $siteColor
+            @media (max-width: 480px)
+                font-size: 14px
+    &__browse-all
+        padding-left: 34px
+        margin: 0 auto
+        width: 220px
+        @media (max-width: 1024px)
+            width: 208px
+        @media (max-width: 800px)
+            width: 191px
+        @media (max-width: 480px)
+            width: 176px
+
+//experts
+.experts
+    background-image: url(../img/experts/bg.jpg)
+    background-repeat: no-repeat
+    background-position: center
+    background-size: cover
+    max-width: 1600px
+    width: 100%
+    height: 849px
+    margin: 0 auto
+    &__wrapper
+        padding-top: 222px
+        position: relative
+    &__img
+        display: block
+        margin: 0 auto
+        border-radius: 100px
+        width: 157px
+        height: 157px
+        object-fit: cover
+    &__quote
+        color: #65e47d
+        position: absolute
+        top: 58%
+        left: 53.5%
+        font-size: 49px
+    &__name
+        margin-top: 21px
+        font-size: 24px
+        line-height: 1.2
+        font-weight: 700
+        letter-spacing: 1.1px
+        width: 100%
+        text-align: center
+        color: $siteColor
+        @media (max-width: 1024px)
+                font-size: 22px
+        @media (max-width: 800px)
+                font-size: 20px
+        @media (max-width: 480px)
+                font-size: 18px
+    &__title
+        color: #9191b5
+        font-family: $secondFont
+        margin-top: 6px
+        font-size: 15px
+        line-height: 1.2
+        font-weight: 400
+        letter-spacing: .7px
+        width: 100%
+        text-align: center
+        @media (max-width: 1024px)
+                font-size: 14px
+        @media (max-width: 480px)
+                font-size: 12px
+    &__text
+        color: #9191b5
+        font-family: $secondFont
+        width: 64%
+        margin: 0 auto
+        text-align: center
+        margin-top: 38px
+        margin-bottom: 47px
+        line-height: 1.8
+        letter-spacing: 0.27px
+        @media (max-width: 1024px)
+                font-size: 14px
+        @media (max-width: 800px)
+            width: 100%
+        @media (max-width: 480px)
+                font-size: 12px
+    &__radio
+        display: flex
+        justify-content: space-evenly
+        width: 92px
+        margin: 0 auto
+    &__btn
+        display: block
+        border: 1px solid $siteColor
+        width: 8px
+        height: 8px
+        background: $siteColor
+        border-radius: 50px
+        &:not(:last-of-type)
+            margin-right: 1.5px
+
+//events   
+.events
+    padding-top: 163px  
+    padding-bottom: 171px  
+    display: flex
+    @media (max-width: 800px)
+        padding-top: 60px
+        padding-bottom: 90px
+        justify-content: center
+        flex-wrap: wrap
+    @media (max-width: 480px)
+        padding-bottom: 60px
+    &__left
+        margin-right: 13.6%
+        @media (max-width: 800px)
+            width: 37.1%
+            min-width: 240px
+            margin-right: 0
+        @media (max-width: 425px)
+            margin-right: 10%
+    &__img
+        width: 100%
+        height: auto
+        background: linear-gradient(-60deg, #5acab1 -13%, #426384 113%)
+        img
+            width: 100%
+            height: auto
+            padding: 11.9% 0 9.6% 0
+            transform: translateX(11.4%)
+    &__right 
+        width: 48%
+        @media (max-width: 1024px)
+            width: 50%
+        @media (max-width: 800px)
+            width: 100%
+    &__name
+        padding-left: 4px
+        font-family: $secondFont
+        font-weight: 300
+        font-size: 18px
+        line-height: .9
+        letter-spacing: .8px
+        text-align: left
+        color: #696980
+        margin-bottom: 27px
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 800px)
+            margin-top: 20px
+            margin-bottom: 18px
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 13px
+    &__title
+        margin-bottom: 17px
+        font-size: 48px
+        font-weight: 600
+        line-height: 0.92
+        letter-spacing: 1.8px
+        text-align: left
+        color: #44444f
+        @media (max-width: 1024px)
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+        @media (max-width: 343px)
+            font-size: 29px
+    &__text
+        padding-left: 3px
+        font-size: 18px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: 1px
+        text-align: left
+        color: $siteColor
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 885px)
+            line-height: 18px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 13px
+    &__wrapper
+        margin-top: 48px
+        @media (max-width: 800px)
+            margin-top: 45px
+        @media (max-width: 480px)
+            margin-top: 35px
+        &:nth-of-type(2)
+            margin-top: 61px
+            @media (max-width: 800px)
+                margin-top: 55px
+            @media (max-width: 480px)
+                margin-top: 40px
+    &__date
+        font-family: $secondFont
+        font-size: 15px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: 0.75px
+        text-align: left
+        color: #696980
+        @media (max-width: 1024px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 12px
+    &__place
+        margin-top: 8px
+        margin-bottom: 15px
+        font-size: 18px
+        font-weight: 600
+        line-height: 1.4
+        letter-spacing: 0.9px
+        text-align: left
+        color: #44444f
+        @media (max-width: 1024px)
+            font-size: 17px
+        @media (max-width: 800px)
+            font-size: 16px
+    &__description
+        margin-bottom: 25px
+        font-family: $secondFont
+        font-size: 15px
+        font-weight: 400
+        line-height: 1.6
+        letter-spacing: 0.75px
+        text-align: left
+        color: #696980
+        @media (max-width: 1024px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 12px
+    &__btn
+        width: 137px
+        padding-left: 34px
+        @media (max-width: 1024px)
+            width: 130px
+            padding-top: 10px
+            height: 38px
+        @media (max-width: 480px)
+            width: 117px
+            padding-top: 8px
+            height: 34px
+
+//blog
+.blog
+    padding-top: 165px
+    padding-bottom: 150px
+    background-color: #f5f6fa
+    @media (max-width: 800px)
+        padding-top: 90px
+        padding-bottom: 90px
+    @media (max-width: 480px)
+        padding-top: 60px
+    &__title
+        margin-bottom: 17px
+        font-size: 48px
+        font-weight: 700
+        line-height: 0.92
+        letter-spacing: 1.9px
+        text-align: center
+        color: #44444f
+        @media (max-width: 1024px)
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+        @media (max-width: 343px)
+            font-size: 29px
+    &__title-bottom
+        padding-left: 3px
+        font-size: 18px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: 1px
+        text-align: center
+        color: $siteColor
+        @media (max-width: 1024px)
+            font-size: 16px
+        @media (max-width: 885px)
+            line-height: 18px
+        @media (max-width: 800px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 13px
+    &__wrapper
+        margin-top: 89px
+        display: flex
+        justify-content: space-between
+        @media (max-width: 800px)
+            margin-top: 60px
+            flex-wrap: wrap
+            justify-content: center
+        @media (max-width: 480px)
+            margin-top: 40px
+    &__view
+        width: 31.5%
+        @media (max-width: 800px)
+            width: 100%
+            text-align: center
+            &:not(:last-of-type)
+                margin-bottom: 35px
+        &-img
+            max-width: 369px 
+            max-height: 224px
+            width: 100%
+        &-title
+            margin-top: 12px
+            margin-bottom: 6px
+            font-size: 18px
+            font-weight: 600
+            line-height: 1.33
+            letter-spacing: 0.9px
+            text-align: left
+            color: #44444f
+            @media (max-width: 1024px)
+                font-size: 17px
+            @media (max-width: 800px)
+                text-align: center
+            @media (max-width: 480px)
+                font-size: 16px
+        &-name
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 400
+            line-height: 1.2
+            letter-spacing: 0.75px
+            text-align: left
+            color: $siteColor
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 800px)
+                text-align: center
+            @media (max-width: 480px)
+                font-size: 12px
+            span
+                color: #80809b
+        &-text
+            margin-top: 15px
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 400
+            line-height: 1.6
+            letter-spacing: 0.75px
+            text-align: left
+            color: #696980
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 800px)
+                text-align: center
+            @media (max-width: 480px)
+                font-size: 12px
+    &__btn
+        display: block
+        margin: 0 auto
+        margin-top: 85px
+        width: 265px
+        padding-left: 30px
+        @media (max-width: 1024px)
+            width: 239px
+        @media (max-width: 800px)
+            width: 219px
+        @media (max-width: 480px)
+            margin-top: 65px
+            width: 198px
+
+//subscribe
+.subscribe
+    padding-top: 167px
+    padding-bottom: 155px
+    display: flex
+    justify-content: space-between
+    @media (max-width: 800px)
+        justify-content: center
+        flex-wrap: wrap
+        padding-top: 60px
+        padding-bottom: 60px
+    &__left
+        width: 47.9%
+        @media (max-width: 800px)
+            width: 100%
+    &__right 
+        padding-top: 3px
+        width: 48.7%
+        @media (max-width: 800px)
+            width: 100%
+    &__title
+        margin-bottom: 14px
+        font-size: 48px
+        font-weight: 700
+        line-height: 0.92
+        letter-spacing: 1.6px
+        text-align: left
+        color: #44444f
+        @media (max-width: 1024px)
+            font-size: 39px
+        @media (max-width: 800px)
+            font-size: 36px
+        @media (max-width: 480px)
+            font-size: 32px
+    &__text
+        font-size: 15px
+        font-weight: 400
+        line-height: 1.6
+        letter-spacing: 0.75px
+        text-align: left
+        color: #696980
+        font-family: $secondFont
+        @media (max-width: 1024px)
+            font-size: 14px
+        @media (max-width: 480px)
+            font-size: 12px
+    &__email
+        padding: 0px 50px 0 27px
+        width: 100%
+        height: 48px
+        border: none
+        border-radius: 3px
+        font-size: 15px
+        font-weight: 300
+        line-height: 1.6
+        letter-spacing: 1.15px
+        text-align: left
+        background-color: #444450
+        @media (max-width: 480px)
+            height: 35px
+            font-size: 13px
+        &::-webkit-input-placeholder
+            color: #9191b5
+        &::-moz-placeholder
+            color: #9191b5
+        &:active, &:hover, &:focus 
+            outline: 0
+            outline-offset: 0
+            box-shadow: 0px 5px 6px 2px rgb(100 115 130 / 63%)
+    &__btn
+        margin-top: 20px
+        width: 100%
+        padding-left: 42.4%
+        @media (max-width: 1024px)
+            padding-left: 41.4%
+        @media (max-width: 900px)
+            padding-left: 40.4%
+        @media (max-width: 800px)
+            padding-left: 45.4%
+        @media (max-width: 658px)
+            padding-left: 44%
+        @media (max-width: 540px)
+            padding-left: 43%
+        @media (max-width: 425px)
+            padding-left: 42%
+        @media (max-width: 390px)
+            padding-left: 41%
+        @media (max-width: 320px)
+            padding-left: 39%
+
+//footer
+.footer
+    padding-top: 156px
+    padding-bottom: 154px
+    background-color: #44444f
+    @media (max-width: 800px)
+        padding-top: 90px
+        padding-bottom: 90px
+    @media (max-width: 480px)
+        padding-top: 60px
+        padding-bottom: 60px
+    &__wrapper
+        display: flex
+        justify-content: space-between
+        @media (max-width: 800px)
+            flex-wrap: wrap
+            margin-bottom: 25px
+    &__left
+        width: 31.1%
+        @media (max-width: 800px)
+            width: 50%
+            margin-bottom: 25px
+        @media (max-width: 600px)
+            width: 100%
+        @media (max-width: 480px)
+            margin-bottom: 15px
+        &-text
+            margin-top: 24px
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 300
+            line-height: 1.6
+            letter-spacing: 0.6px
+            text-align: left
+            color: #9191b5
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+    &__mid
+        //width: 19.4%
+        width: 216px
+        margin-right: 4.1%
+        @media (max-width: 1024px)
+            margin-right: 0
+        @media (max-width: 800px)
+            width: 40%
+        @media (max-width: 480px)
+            width: 100%
+            margin-bottom: 15px
+        &-title
+            margin-bottom: 18px
+            padding-top: 13px
+            text-transform: uppercase
+            font-size: 18px
+            font-weight: 700
+            line-height: 1.33
+            letter-spacing: 0.72px
+            text-align: left
+            color: $siteColor
+            @media (max-width: 1024px)
+                font-size: 17px
+            @media (max-width: 800px)
+                font-size: 16px
+            @media (max-width: 480px)
+                font-size: 14px
+        &-link
+            transition: color .3s
+            display: block
+            text-decoration: none
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 300
+            line-height: 1.87
+            letter-spacing: 0.6px
+            text-align: left
+            color: #9191b5
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+            &:hover
+                color:#aeaed8
+    &__right
+        width: 21.9%
+        margin-right: 1.2%
+        @media (max-width: 1024px)
+            margin-right: 0
+        @media (max-width: 800px)
+            width: 40%
+        @media (max-width: 480px)
+            width: 100%
+        &-title
+            margin-bottom: 22px
+            padding-top: 13px
+            text-transform: uppercase
+            font-size: 18px
+            font-weight: 700
+            line-height: 1.33
+            letter-spacing: 0.72px
+            text-align: left
+            color: $siteColor
+            @media (max-width: 1024px)
+                font-size: 17px
+            @media (max-width: 800px)
+                font-size: 16px
+            @media (max-width: 480px)
+                font-size: 14px
+        &-text
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 300
+            line-height: 1.4
+            letter-spacing: 0.6px
+            text-align: left
+            color: #9191b5
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+            &:nth-of-type(3),&:nth-of-type(4)
+                margin-top: 3px
+        &-wrapper
+            display: flex
+            margin-top: 14px
+            margin-left: -2px
+            justify-content: space-between
+            width: 149px
+        &-link
+            transition: color .3s
+            color: $siteColor
+            &:hover
+                color: #5189a0
+    &__bottom
+            margin-top: 11px
+            font-family: $secondFont
+            font-size: 15px
+            font-weight: 300
+            line-height: 1.6
+            letter-spacing: 0.6px
+            text-align: left
+            color: #9191b5
+            @media (max-width: 1024px)
+                font-size: 14px
+            @media (max-width: 480px)
+                font-size: 12px
+                
+
+
+//media___________________________
+@media (max-width: 800px)
+    .body__lock
+        overflow: hidden
