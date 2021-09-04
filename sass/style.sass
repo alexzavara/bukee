@@ -1108,14 +1108,25 @@ body
     background-repeat: no-repeat
     background-position: center
     background-size: cover
+    min-width: 0
     max-width: 1600px
     width: 100%
     height: 849px
     margin: 0 auto
+    overflow: hidden
+    &__slider
+        min-width: 0
+        transition: .2s
+        display: flex
     &__wrapper
-        padding-top: 222px
+        padding-top: 221px
         position: relative
+        min-width: 100%
+        @media (max-width: 800px)
+            padding-left: 15px
+            padding-right: 15px
     &__img
+        min-width: 0
         display: block
         margin: 0 auto
         border-radius: 100px
@@ -1123,12 +1134,24 @@ body
         height: 157px
         object-fit: cover
     &__quote
+        min-width: 0
         color: #65e47d
         position: absolute
-        top: 58%
+        top: 220px
         left: 53.5%
         font-size: 49px
+        @media (max-width: 800px)
+            left: 54.5%
+        @media (max-width: 660px)
+            left: 55.5%
+        @media (max-width: 540px)
+            left: 56.5%
+        @media (max-width: 480px)
+            left: 57.5%
+        @media (max-width: 374px)
+            left: 59.5%
     &__name
+        min-width: 0
         margin-top: 21px
         font-size: 24px
         line-height: 1.2
@@ -1144,6 +1167,7 @@ body
         @media (max-width: 480px)
                 font-size: 18px
     &__title
+        min-width: 0
         color: #9191b5
         font-family: $secondFont
         margin-top: 6px
@@ -1158,6 +1182,7 @@ body
         @media (max-width: 480px)
                 font-size: 12px
     &__text
+        min-width: 0
         color: #9191b5
         font-family: $secondFont
         width: 64%
