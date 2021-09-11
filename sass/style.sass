@@ -1204,14 +1204,17 @@ body
         width: 92px
         margin: 0 auto
     &__btn
+        cursor: pointer
         display: block
-        border: 1px solid $siteColor
+        border: 1px solid #44444e
         width: 8px
         height: 8px
         background: $siteColor
         border-radius: 50px
         &:not(:last-of-type)
             margin-right: 1.5px
+        &_active
+            border: 1px solid $siteColor
 
 //events   
 .events

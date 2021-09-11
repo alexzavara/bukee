@@ -1855,8 +1855,9 @@ body {
   margin: 0 auto;
 }
 .experts__btn {
+  cursor: pointer;
   display: block;
-  border: 1px solid #65e496;
+  border: 1px solid #44444e;
   width: 8px;
   height: 8px;
   background: #65e496;
@@ -1864,6 +1865,9 @@ body {
 }
 .experts__btn:not(:last-of-type) {
   margin-right: 1.5px;
+}
+.experts__btn_active {
+  border: 1px solid #65e496;
 }
 
 .events {
