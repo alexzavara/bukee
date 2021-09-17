@@ -145,5 +145,42 @@ document.querySelector('.header__burger-btn').addEventListener('click', (e) => {
     }
 
     function transitionSlides () {
-        expertsSlider.style.transition = 'transform .2s'
+        expertsSlider.style.transition = 'transform .4s'
     }
+
+    function caruselAnimated () {
+            transitionSlides()
+            position++
+            infinityCarusel()
+            expertsSliderPosition()
+            positionOfBtn()
+        if (position > 6) {
+            transitionSlides()
+            position = 1
+            infinityCarusel()
+            expertsSliderPosition()
+            positionOfBtn()
+        } else if (position < 0) {
+            transitionSlides()
+            position = 4
+            infinityCarusel()
+            expertsSliderPosition()
+            positionOfBtn()
+        } 
+    }
+
+
+let intervalTime = 4000
+let timerId = setInterval (caruselAnimated, intervalTime)
+
+
+
+expertsContainer.addEventListener('mouseover', () => {
+    clearTimeout(timerId)
+}) 
+
+expertsContainer.addEventListener('mouseout', () => {
+    timerId = setInterval (caruselAnimated, intervalTime)
+    timerId
+})
+
