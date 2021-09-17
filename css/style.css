@@ -1717,7 +1717,7 @@ body {
 }
 .experts__slider {
   min-width: 0;
-  transition: 0.2s;
+  transition: transform 0.2s;
   display: flex;
 }
 .experts__wrapper {
@@ -1863,11 +1863,15 @@ body {
   background: #65e496;
   border-radius: 50px;
 }
+.experts__btn:hover {
+  background: #beddca;
+}
 .experts__btn:not(:last-of-type) {
   margin-right: 1.5px;
 }
 .experts__btn_active {
-  border: 1px solid #65e496;
+  background: #beddca;
+  border: 1px solid #beddca;
 }
 
 .events {
