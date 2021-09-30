@@ -134,6 +134,18 @@ body
         font-size: 13px
 
 
+//slider
+.slider-wr
+    width: 100%
+    overflow: hidden
+.slider-line
+    display: flex
+    overflow: hidden
+.slider-item
+    min-width: 1px
+    @media (max-width: 750px)
+        margin-right: 20px
+
 
 //________________________________
 //header
@@ -1114,18 +1126,13 @@ body
     height: 849px
     margin: 0 auto
     overflow: hidden
-    &__slider
-        min-width: 0
-        //transform: translateX(-100%)
-        transition: transform .2s
-        display: flex
+    &__content
+        padding-left: 0
+        padding-right: 0
+        user-select: none
     &__wrapper
         padding-top: 221px
         position: relative
-        min-width: 100%
-        @media (max-width: 800px)
-            padding-left: 15px
-            padding-right: 15px
     &__img
         min-width: 0
         display: block
@@ -1134,6 +1141,7 @@ body
         width: 157px
         height: 157px
         object-fit: cover
+        user-select: none
     &__quote
         min-width: 0
         color: #65e47d
@@ -1538,6 +1546,7 @@ body
         @media (max-width: 480px)
             font-size: 12px
     &__email
+        transition: box-shadow .3s
         padding: 0px 50px 0 27px
         width: 100%
         height: 48px

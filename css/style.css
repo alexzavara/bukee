@@ -179,6 +179,25 @@ body {
   }
 }
 
+.slider-wr {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-line {
+  display: flex;
+  overflow: hidden;
+}
+
+.slider-item {
+  min-width: 1px;
+}
+@media (max-width: 750px) {
+  .slider-item {
+    margin-right: 20px;
+  }
+}
+
 .header {
   background-color: #536472;
   background-image: linear-gradient(-60deg, #54b7a1 -23%, #426384 123%);
@@ -1715,21 +1734,14 @@ body {
   margin: 0 auto;
   overflow: hidden;
 }
-.experts__slider {
-  min-width: 0;
-  transition: transform 0.2s;
-  display: flex;
+.experts__content {
+  padding-left: 0;
+  padding-right: 0;
+  user-select: none;
 }
 .experts__wrapper {
   padding-top: 221px;
   position: relative;
-  min-width: 100%;
-}
-@media (max-width: 800px) {
-  .experts__wrapper {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 }
 .experts__img {
   min-width: 0;
@@ -1739,6 +1751,7 @@ body {
   width: 157px;
   height: 157px;
   object-fit: cover;
+  user-select: none;
 }
 .experts__quote {
   min-width: 0;
@@ -2405,6 +2418,7 @@ body {
   }
 }
 .subscribe__email {
+  transition: box-shadow 0.3s;
   padding: 0px 50px 0 27px;
   width: 100%;
   height: 48px;
