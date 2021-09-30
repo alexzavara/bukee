@@ -138,13 +138,16 @@ body
 .slider-wr
     width: 100%
     overflow: hidden
+    user-select: none
 .slider-line
     display: flex
     overflow: hidden
 .slider-item
     min-width: 1px
-    @media (max-width: 750px)
-        margin-right: 20px
+    transform: translateZ(0)
+.slider-draggable
+    cursor: grabbing
+
 
 
 //________________________________
@@ -1129,7 +1132,6 @@ body
     &__content
         padding-left: 0
         padding-right: 0
-        user-select: none
     &__wrapper
         padding-top: 221px
         position: relative
@@ -1141,7 +1143,6 @@ body
         width: 157px
         height: 157px
         object-fit: cover
-        user-select: none
     &__quote
         min-width: 0
         color: #65e47d
