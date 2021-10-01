@@ -18,9 +18,17 @@ class SliderV {
         this.setParameters = this.setParameters.bind(this)
         this.setEvents = this.setEvents.bind(this)
         this.resizeSlider = this.resizeSlider.bind(this)
+
+
         this.startDrag = this.startDrag.bind(this)
+        this.startSwipe = this.startSwipe.bind(this)
+
         this.stopDrag = this.stopDrag.bind(this)
+        this.stopSwipe = this.stopSwipe.bind(this)
+
         this.dragging = this.dragging.bind(this)
+        this.swiping = this.swiping.bind(this)
+
         this.setStylePosition = this.setStylePosition.bind(this)
 
 
@@ -50,7 +58,6 @@ class SliderV {
     setParameters() {
         const coordsContainer = this.containerNode.getBoundingClientRect()
         this.width = coordsContainer.width
-        this.maximumX = -(this.size - 1) * (this.width + this.settings.margin)
         this.x = -this.currentSlide * (this.width + this.settings.margin)
 
         this.resetStyleTransition()
@@ -65,48 +72,73 @@ class SliderV {
     setEvents() {
         this.debouncedResizeSlider = debounce(this.resizeSlider)
         window.addEventListener('resize', this.debouncedResizeSlider)
-        this.lineNode.addEventListener('pointerdown', this.startDrag)
-        //this.lineNode.addEventListener("touchstart", this.startDrag)
+
+        this.lineNode.addEventListener('mousedown', this.startDrag)
+        this.lineNode.addEventListener("touchstart", this.startSwipe)
 
 
-        window.addEventListener('pointerup', this.stopDrag)
-        //window.addEventListener("touchend", this.stopDrag)
+        window.addEventListener('mouseup', this.stopDrag)
+        window.addEventListener("touchend", this.stopSwipe)
 
-        window.addEventListener('pointercancel', this.stopDrag)
-        //window.addEventListener("touchcancel", this.stopDrag)
+        //window.addEventListener('mousecancel', this.stopDrag)
+        //window.addEventListener("touchcancel", this.stopSwipe)
     }
 
     destroyEvents() {
         window.removeEventListener('resize', this.debouncedResizeSlider)
-        this.lineNode.removeEventListener('pointerdown', this.startDrag)
-        window.removeEventListener('pointerup', this.startDrag)
-        window.removeEventListener('pointercancel', this.stopDrag)
+
+        this.lineNode.removeEventListener('mousedown', this.startDrag)
+        window.removeEventListener('mouseup', this.startDrag)
+        window.removeEventListener('mousecancel', this.stopDrag)
+
+        this.lineNode.removeEventListener('touchstart', this.startSwipe)
+        window.removeEventListener('touchend', this.startSwipe)
+        window.removeEventListener('touchcancel', this.stopSwipe)
+
     }
 
     resizeSlider() {
-        console.log(1)
         this.setParameters()
 
     }
 
     startDrag(evt) {
         this.currentSlideWasChanged = false
-        this.clickX = evt.pageX
-        this.startX = this.x
+        this.clickX = evt.pageX //положение мышки
+        this.startX = this.x //текущий слайдер
+
         this.resetStyleTransition()
 
         this.containerNode.classList.add(SliderDraggableClassName)
-        window.addEventListener('pointermove', this.dragging)
-        //window.addEventListener("touchmove", this.dragging)
+        window.addEventListener('mousemove', this.dragging)
+    }
+
+    startSwipe(evt) {
+        this.currentSlideWasChanged = false
+        this.touchX = evt.touches[0].clientX //положение пальца
+        this.startX = this.x  //текущий слайдер
+
+        this.resetStyleTransition()
+
+        window.addEventListener("touchmove", this.swiping)
     }
 
     stopDrag() {
-        window.removeEventListener('pointermove', this.dragging)
-        //window.removeEventListener("touchmove", this.dragging)
+        window.removeEventListener('mousemove', this.dragging)
         
         this.containerNode.classList.remove(SliderDraggableClassName)
+        this.x = -this.currentSlide * (this.width + this.settings.margin)
+
+        this.setStylePosition()
+        this.setStyleTransition()
+
+    }
+
+    stopSwipe() {
+        window.removeEventListener("touchmove", this.swiping)
 
         this.x = -this.currentSlide * (this.width + this.settings.margin)
+
         this.setStylePosition()
         this.setStyleTransition()
     }
@@ -116,12 +148,8 @@ class SliderV {
         const dragShift = this.dragX -this.clickX
         this.x = this.startX + dragShift
         
-
-
-        //this.setStylePosition()
-
-        console.log('this.dragX ' + this.dragX)
-        console.log('dragShift ' + dragShift)
+        
+        this.setStylePosition()
         
 
         //change active slide
@@ -143,7 +171,36 @@ class SliderV {
         ) {
             this.currentSlideWasChanged = true
             this.currentSlide = this.currentSlide + 1
+        } 
+    }
+
+    swiping(evt) {
+        this.swipeX = evt.touches[0].clientX
+        const swipeShift = this.swipeX -this.touchX
+        this.x = this.startX + swipeShift
+
+        this.setStylePosition()
+
+        if (
+            swipeShift > 20 &&
+            swipeShift > 0 &&
+            !this.currentSlideWasChanged &&
+            this.currentSlide > 0
+        ) {
+            this.currentSlideWasChanged = true
+            this.currentSlide = this.currentSlide - 1
         }
+
+        if (
+            swipeShift < -20 &&
+            swipeShift < 0 &&
+            !this.currentSlideWasChanged &&
+            this.currentSlide < this.size - 1
+        ) {
+            this.currentSlideWasChanged = true
+            this.currentSlide = this.currentSlide + 1
+        }         
+
     }
 
     setStylePosition() {
