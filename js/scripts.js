@@ -13,6 +13,10 @@ document.querySelector('.header__burger-btn').addEventListener('click', (e) => {
 
 
 
-new SliderV(document.getElementById('slider-wr'), {
+new SliderV(document.getElementById('slider-exp'), {
     margin: 10
+})
+
+new SliderV(document.getElementById('slider-oth'), {
+    
 })

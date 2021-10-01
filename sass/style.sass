@@ -981,36 +981,24 @@ body
         @media (max-width: 1024px)
             justify-content: center
         @media (max-width: 800px)
-            flex-wrap: wrap
+            display: none
             margin-bottom: 65px
         @media (max-width: 480px)
             margin-bottom: 45px
         @media (max-width: 320px)
             margin-bottom: 30px
+        &-slider
+            display: none
+            @media (max-width: 800px)
+                display: block
     &__wrapper-book
         width: 27%
         @media (max-width: 1024px)
             max-width: 268px
             width: 33%
         @media (max-width: 800px)
-            min-width: 280px
-        &:first-of-type
-            @media (max-width: 800px)
-                width: 100%
-                margin-bottom: 30px
-            @media (max-width: 607px)
-                margin-bottom: 15px
-        &:nth-of-type(2)
-            margin-right: 2.5%
-            margin-left: 2.5%
-            @media (max-width: 1024px)
-                margin-right: 1.5%
-                margin-left: 1.5%  
-            @media (max-width: 607px)
-                margin-bottom: 15px
-        &:last-of-type
-            @media (max-width: 800px)
-                width: 100%
+            margin: 0 auto
+            width: 100%
     &__book
         margin-left: 23px
         margin-bottom: 10.4%
@@ -1113,8 +1101,10 @@ body
         @media (max-width: 1024px)
             width: 208px
         @media (max-width: 800px)
+            margin-top: 45px
             width: 191px
         @media (max-width: 480px)
+            margin-top: 30px
             width: 176px
 
 //experts

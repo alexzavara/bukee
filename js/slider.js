@@ -81,7 +81,7 @@ class SliderV {
         window.addEventListener("touchend", this.stopSwipe)
 
         //window.addEventListener('mousecancel', this.stopDrag)
-        //window.addEventListener("touchcancel", this.stopSwipe)
+        window.addEventListener("touchcancel", this.stopSwipe)
     }
 
     destroyEvents() {
