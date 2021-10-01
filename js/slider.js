@@ -66,8 +66,14 @@ class SliderV {
         this.debouncedResizeSlider = debounce(this.resizeSlider)
         window.addEventListener('resize', this.debouncedResizeSlider)
         this.lineNode.addEventListener('pointerdown', this.startDrag)
+        //this.lineNode.addEventListener("touchstart", this.startDrag)
+
+
         window.addEventListener('pointerup', this.stopDrag)
+        //window.addEventListener("touchend", this.stopDrag)
+
         window.addEventListener('pointercancel', this.stopDrag)
+        //window.addEventListener("touchcancel", this.stopDrag)
     }
 
     destroyEvents() {
@@ -91,10 +97,12 @@ class SliderV {
 
         this.containerNode.classList.add(SliderDraggableClassName)
         window.addEventListener('pointermove', this.dragging)
+        //window.addEventListener("touchmove", this.dragging)
     }
 
     stopDrag() {
         window.removeEventListener('pointermove', this.dragging)
+        //window.removeEventListener("touchmove", this.dragging)
         
         this.containerNode.classList.remove(SliderDraggableClassName)
 
@@ -108,8 +116,13 @@ class SliderV {
         const dragShift = this.dragX -this.clickX
         this.x = this.startX + dragShift
         
-        this.setStylePosition()
 
+
+        //this.setStylePosition()
+
+        console.log('this.dragX ' + this.dragX)
+        console.log('dragShift ' + dragShift)
+        
 
         //change active slide
         if (
@@ -135,6 +148,7 @@ class SliderV {
 
     setStylePosition() {
         this.lineNode.style.transform = `translate3d(${this.x}px, 0, 0)`
+
     }
 
     setStyleTransition() {
