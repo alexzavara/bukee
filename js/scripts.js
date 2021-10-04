@@ -18,5 +18,5 @@ new SliderV(document.getElementById('slider-exp'), {
 })
 
 new SliderV(document.getElementById('slider-oth'), {
-    
+    margin: 10
 })

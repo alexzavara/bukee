@@ -199,6 +199,32 @@ body {
   cursor: grabbing;
 }
 
+.slider-dots {
+  display: flex;
+  justify-content: space-evenly;
+  width: 92px;
+  margin: 0 auto;
+}
+
+.slider-dot {
+  cursor: pointer;
+  display: block;
+  border: none;
+  width: 8px;
+  height: 8px;
+  background: #beddca;
+  border-radius: 50px;
+}
+.slider-dot:hover {
+  background: #50b878;
+}
+.slider-dot:not(:last-of-type) {
+  margin-right: 1.5px;
+}
+.slider-dot-active {
+  background: #50b878;
+}
+
 .header {
   background-color: #536472;
   background-image: linear-gradient(-60deg, #54b7a1 -23%, #426384 123%);
@@ -1675,8 +1701,14 @@ body {
   letter-spacing: 0.05em;
   color: #65e496;
 }
+@media (max-width: 800px) {
+  .other__bottom-more {
+    margin-bottom: 40px;
+  }
+}
 @media (max-width: 480px) {
   .other__bottom-more {
+    margin-bottom: 25px;
     font-size: 14px;
   }
 }

@@ -2,7 +2,9 @@ const SliderClassName = 'slider-wr'
 const SliderDraggableClassName = 'slider-draggable'
 const SliderLineClassName = 'slider-line'
 const SliderItemClassName = 'slider-item'
-
+const SliderDotsClassName = 'slider-dots'
+const SliderDotClassName = 'slider-dot'
+const SliderActiveDotClassName = 'slider-dot-active'
 
 class SliderV {
     constructor(element, options = {}) {
@@ -18,24 +20,26 @@ class SliderV {
         this.setParameters = this.setParameters.bind(this)
         this.setEvents = this.setEvents.bind(this)
         this.resizeSlider = this.resizeSlider.bind(this)
-
-
         this.startDrag = this.startDrag.bind(this)
         this.startSwipe = this.startSwipe.bind(this)
-
         this.stopDrag = this.stopDrag.bind(this)
         this.stopSwipe = this.stopSwipe.bind(this)
-
         this.dragging = this.dragging.bind(this)
         this.swiping = this.swiping.bind(this)
-
         this.setStylePosition = this.setStylePosition.bind(this)
+        this.disableStyleTransition= this.disableStyleTransition.bind(this)
+        this.changeCurrentSlide = this.changeCurrentSlide.bind(this)
+        this.changeActiveDotClass = this.changeActiveDotClass.bind(this)
+        
+
+
+        this.clickDots = this.clickDots.bind(this)
 
 
         this.manageHTML()
         this.setParameters()
         this.setEvents()
-        //this.setStylePosition()
+        
     }
 
     manageHTML() {
@@ -44,21 +48,34 @@ class SliderV {
             <div class="${SliderLineClassName}">
                 ${this.containerNode.innerHTML}
             </div>
+            <div class="${SliderDotsClassName}"></div>
         `
         this.lineNode = this.containerNode.querySelector(`.${SliderLineClassName}`)
-
+        this.dotsNode = this.containerNode.querySelector(`.${SliderDotsClassName}`)
+        
         this.slideNodes = Array.from(this.lineNode.children).map((childNode) => 
             wrapElementByDiv({
                 element: childNode,
                 className: SliderItemClassName
             })
         )
+
+
+        this.dotsNode.innerHTML = Array.from(Array(this.size).keys()).map((key) => (
+            `<button class="${SliderDotClassName} ${key === this.currentSlide ? SliderActiveDotClassName : ''}"></button>`
+        )).slice(1, (this.size-1)).join('')
+
+        this.dotNodes = this.dotsNode.querySelectorAll(`.${SliderDotClassName}`)
+        
+        
     }
 
     setParameters() {
         const coordsContainer = this.containerNode.getBoundingClientRect()
         this.width = coordsContainer.width
         this.x = -this.currentSlide * (this.width + this.settings.margin)
+
+        this.maximumX = this.size - 1
 
         this.resetStyleTransition()
         this.lineNode.style.width = `${this.size * (this.width + this.settings.margin)}px`
@@ -80,20 +97,31 @@ class SliderV {
         window.addEventListener('mouseup', this.stopDrag)
         window.addEventListener("touchend", this.stopSwipe)
 
-        //window.addEventListener('mousecancel', this.stopDrag)
         window.addEventListener("touchcancel", this.stopSwipe)
+
+        this.dotsNode.addEventListener('click', this.clickDots)
+
+
+
+        
+
     }
 
     destroyEvents() {
         window.removeEventListener('resize', this.debouncedResizeSlider)
 
         this.lineNode.removeEventListener('mousedown', this.startDrag)
-        window.removeEventListener('mouseup', this.startDrag)
-        window.removeEventListener('mousecancel', this.stopDrag)
+        window.removeEventListener('mouseup', this.stopDrag)
 
         this.lineNode.removeEventListener('touchstart', this.startSwipe)
-        window.removeEventListener('touchend', this.startSwipe)
+        window.removeEventListener('touchend', this.stopSwipe)
         window.removeEventListener('touchcancel', this.stopSwipe)
+
+        this.dotsNode.removeEventListener('click', this.clickDots)
+
+
+
+        
 
     }
 
@@ -127,20 +155,16 @@ class SliderV {
         window.removeEventListener('mousemove', this.dragging)
         
         this.containerNode.classList.remove(SliderDraggableClassName)
-        this.x = -this.currentSlide * (this.width + this.settings.margin)
 
-        this.setStylePosition()
-        this.setStyleTransition()
+        this.changeCurrentSlide()
 
     }
 
     stopSwipe() {
         window.removeEventListener("touchmove", this.swiping)
 
-        this.x = -this.currentSlide * (this.width + this.settings.margin)
-
-        this.setStylePosition()
-        this.setStyleTransition()
+        
+        this.changeCurrentSlide()
     }
 
     dragging(evt) {
@@ -161,6 +185,7 @@ class SliderV {
         ) {
             this.currentSlideWasChanged = true
             this.currentSlide = this.currentSlide - 1
+            
         }
 
         if (
@@ -171,6 +196,7 @@ class SliderV {
         ) {
             this.currentSlideWasChanged = true
             this.currentSlide = this.currentSlide + 1
+            
         } 
     }
 
@@ -189,6 +215,7 @@ class SliderV {
         ) {
             this.currentSlideWasChanged = true
             this.currentSlide = this.currentSlide - 1
+            
         }
 
         if (
@@ -203,6 +230,52 @@ class SliderV {
 
     }
 
+    clickDots(evt) {
+        
+        const dotNode = evt.target.closest('button')
+        if(!dotNode) {
+            return
+        }
+        
+        
+        let dotNumber
+        for(let i = 0; i < this.dotNodes.length; i++) {
+            if (this.dotNodes[i] === dotNode) {
+                dotNumber = i + 1
+                break
+            }
+        }
+        
+
+
+        if(dotNumber === this.currentSlide) {
+            return
+        }
+
+        this.currentSlide = dotNumber
+        this.changeCurrentSlide()
+    }
+
+
+    changeCurrentSlide() {
+
+        this.x = -this.currentSlide * (this.width + this.settings.margin)
+
+
+        this.setStylePosition()
+        this.setStyleTransition()
+        this.changeActiveDotClass()
+    }
+
+    changeActiveDotClass() {
+        for(let i = 0; i < this.dotNodes.length; i++) {
+            this.dotNodes[i].classList.remove(SliderActiveDotClassName)
+        }
+
+        this.dotNodes[this.currentSlide - 1].classList.add(SliderActiveDotClassName)
+    }
+    
+
     setStylePosition() {
         this.lineNode.style.transform = `translate3d(${this.x}px, 0, 0)`
 
@@ -214,6 +287,10 @@ class SliderV {
 
     resetStyleTransition() {
         this.lineNode.style.transition = 'all 0s ease 0s'
+    }
+
+    disableStyleTransition() {
+        this.lineNode.style.transition = 'none'
     }
 }
 

@@ -148,6 +148,26 @@ body
 .slider-draggable
     cursor: grabbing
 
+.slider-dots
+    display: flex
+    justify-content: space-evenly
+    width: 92px
+    margin: 0 auto
+.slider-dot
+    cursor: pointer
+    display: block
+    border: none
+    width: 8px
+    height: 8px
+    background: #beddca
+    border-radius: 50px
+    &:hover
+        background: #50b878
+    &:not(:last-of-type)
+        margin-right: 1.5px
+    &-active
+        background: #50b878
+
 
 
 //________________________________
@@ -1092,7 +1112,10 @@ body
             font-weight: 700
             letter-spacing: 0.05em
             color: $siteColor
+            @media (max-width: 800px)
+                margin-bottom: 40px
             @media (max-width: 480px)
+                margin-bottom: 25px
                 font-size: 14px
     &__browse-all
         padding-left: 34px
