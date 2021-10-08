@@ -10,7 +10,7 @@ class SliderV {
     constructor(element, options = {}) {
         this.containerNode = element
         this.size = element.childElementCount
-        this.currentSlide = 1
+        this.currentSlide = 0
         this.currentSlideWasChanged = false
         this.settings = {
             margin: options.margin || 0
@@ -30,6 +30,9 @@ class SliderV {
         this.disableStyleTransition= this.disableStyleTransition.bind(this)
         this.changeCurrentSlide = this.changeCurrentSlide.bind(this)
         this.changeActiveDotClass = this.changeActiveDotClass.bind(this)
+
+        this.jumpForSlider = this.jumpForSlider.bind(this)
+        this.jumpOfLast = this.jumpOfLast.bind(this)
         
 
 
@@ -63,7 +66,7 @@ class SliderV {
 
         this.dotsNode.innerHTML = Array.from(Array(this.size).keys()).map((key) => (
             `<button class="${SliderDotClassName} ${key === this.currentSlide ? SliderActiveDotClassName : ''}"></button>`
-        )).slice(1, (this.size-1)).join('')
+        ))/*.slice(1, (this.size-1))*/.join('')
 
         this.dotNodes = this.dotsNode.querySelectorAll(`.${SliderDotClassName}`)
         
@@ -102,6 +105,9 @@ class SliderV {
         this.dotsNode.addEventListener('click', this.clickDots)
 
 
+        
+
+
 
         
 
@@ -119,7 +125,7 @@ class SliderV {
 
         this.dotsNode.removeEventListener('click', this.clickDots)
 
-
+        this.lineNode.removeEventListener('transitionend', this.jumpOfLast)
 
         
 
@@ -156,6 +162,8 @@ class SliderV {
         
         this.containerNode.classList.remove(SliderDraggableClassName)
 
+        //this.lineNode.addEventListener('transitionend', this.changeCurrentSlide)
+
         this.changeCurrentSlide()
 
     }
@@ -163,7 +171,7 @@ class SliderV {
     stopSwipe() {
         window.removeEventListener("touchmove", this.swiping)
 
-        
+        //this.lineNode.addEventListener('transitionend', this.changeCurrentSlide)
         this.changeCurrentSlide()
     }
 
@@ -240,10 +248,21 @@ class SliderV {
         
         let dotNumber
         for(let i = 0; i < this.dotNodes.length; i++) {
+            /*
+            if (i === 0) {
+                i = 1
+                console.log(i)
+                
+            } else if (i === this.maximumX) {
+                i = this.maximumX - 1
+            }
+            */
+
             if (this.dotNodes[i] === dotNode) {
-                dotNumber = i + 1
+                dotNumber = i
                 break
             }
+            
         }
         
 
@@ -258,23 +277,63 @@ class SliderV {
 
 
     changeCurrentSlide() {
+        /*
+        if (this.currentSlide === this.maximumX){
+            
+            this.currentSlide = 1
+            this.x = -this.currentSlide * (this.width + this.settings.margin)
+            this.disableStyleTransition()
+            this.setStylePosition()
+            this.setStyleTransition()
+            this.changeActiveDotClass()
+        }
+        if (this.currentSlide === 0) {
+            
+            this.currentSlide = this.maximumX -1
+            this.x = -this.currentSlide * (this.width + this.settings.margin)
+            this.disableStyleTransition()
+            this.setStylePosition()
+            this.setStyleTransition()
+            this.changeActiveDotClass()
+            
 
-        this.x = -this.currentSlide * (this.width + this.settings.margin)
-
-
-        this.setStylePosition()
-        this.setStyleTransition()
-        this.changeActiveDotClass()
+        } else {} 
+        */
+            this.x = -this.currentSlide * (this.width + this.settings.margin)
+            this.setStylePosition()
+            this.setStyleTransition()
+            this.changeActiveDotClass()
+        
+              
     }
 
     changeActiveDotClass() {
         for(let i = 0; i < this.dotNodes.length; i++) {
             this.dotNodes[i].classList.remove(SliderActiveDotClassName)
+           
         }
+        
+        this.dotNodes[this.currentSlide].classList.add(SliderActiveDotClassName)
 
-        this.dotNodes[this.currentSlide - 1].classList.add(SliderActiveDotClassName)
+    }
+
+
+
+    jumpForSlider(){   
+        
     }
     
+    jumpOfLast() {
+        if (this.currentSlide === this.maximumX){
+            this.disableStyleTransition()
+            this.currentSlide = 1
+        }
+        if (this.currentSlide === 0) {
+            this.disableStyleTransition()
+            this.currentSlide = this.maximumX -1
+        }
+        //console.log(this.maximumX)
+    }
 
     setStylePosition() {
         this.lineNode.style.transform = `translate3d(${this.x}px, 0, 0)`
@@ -282,7 +341,7 @@ class SliderV {
     }
 
     setStyleTransition() {
-        this.lineNode.style.transition = 'all 0.25s ease 0s'
+        this.lineNode.style.transition = 'all .25s ease 0s'
     }
 
     resetStyleTransition() {
